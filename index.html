@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Jr Infocell - Acessórios e Assistência Técnica</title>
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    header a.logo {
+      color: #FF6600;
+      font-size: 2em;
+      text-decoration: none;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #FF6600;
+    }
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    .carousel img {
+      width: 100%;
+      height: 80vh;
+      object-fit: cover;
+      display: none;
+      transition: opacity 1s ease;
+    }
+    .carousel img.active {
+      display: block;
+      opacity: 1;
+    }
+    .carousel-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      text-align: center;
+      z-index: 2;
+    }
+    .carousel-text h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+    }
+    .carousel-text a {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #FF6600;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .carousel-text a:hover {
+      background: #e65c00;
+      transform: scale(1.05);
+    }
+    /* Setas de navegação do carrossel */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      transition: background 0.3s ease;
+    }
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .carousel-arrow.prev {
+      left: 20px;
+    }
+    .carousel-arrow.next {
+      right: 20px;
+    }
+    section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .about, .services, .products {
+      text-align: center;
+    }
+    .about h2, .services h2, .products h2 {
+      color: #FF6600;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+    }
+    .about p, .services p, .products p {
+      color: #555;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+    .services-grid, .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(255,102,0,0.4);
+    }
+    .card h3 {
+      color: #FF6600;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: #555;
+    }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: #fff;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 1.8em;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+    .whatsapp-icon {
+      width: 35px;
+      height: 35px;
+      filter: brightness(0) invert(1);
+    }
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    /* Estilo para fallback de imagens */
+    .img-fallback {
+      background: linear-gradient(135deg, #FF6600, #000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<header>
+<a class="logo" href="#">Jr Infocell</a>
+<nav>
+<a href="#about">Sobre</a>
+<a href="#services">Serviços</a>
+<a href="#contact">Fale Conosco</a>
+</nav>
+</header>
+<!-- Carousel -->
+<div class="carousel">
+<img alt="Assistência Técnica" class="active" src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" onerror="this.onerror=null; this.classList.add('img-fallback'); this.innerHTML='<div>Assistência Técnica</div>';"/>
+<img alt="Venda de Acessórios" src="https://images.unsplash.com/photo-1555617117-08b37efc5b59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80" onerror="this.onerror=null; this.classList.add('img-fallback'); this.innerHTML='<div>Acessórios Premium</div>';"/>
+<img alt="Atendimento Humanizado" src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" onerror="this.onerror=null; this.classList.add('img-fallback'); this.innerHTML='<div>Atendimento Humanizado</div>';"/>
+<div class="carousel-text">
+<h1>Acessórios e assistência tecnica</h1>
+<a href="#services">Conheça Nossos Serviços</a>
+</div>
+<!-- Setas de navegação -->
+<button class="carousel-arrow prev">&#10094;</button>
+<button class="carousel-arrow next">&#10095;</button>
+</div>
+<!-- About -->
+<section class="about" id="about">
+<h2>Sobre Nós</h2>
+<p>A Jr Infocell é referência em tecnologia e assistência técnica, com ênfase em importados e atendimento humanizado.</p>
+</section>
+<!-- Services -->
+<section class="services" id="services">
+<h2>Nossos Serviços</h2>
+<div class="services-grid">
+<div class="card">
+<h3>Conserto de Celulares</h3>
+<p>Assistência técnica para todas as marcas com peças de qualidade.</p>
+</div>
+<div class="card">
+<h3>Acessórios Premium</h3>
+<p>Carregadores, películas e mais com garantia e procedência.</p>
+</div>
+<div class="card">
+<h3>Importados Exclusivos</h3>
+<p>Smartphones e gadgets internacionais sob encomenda.</p>
+</div>
+</div>
+</section>
+<!-- WhatsApp Floating Button -->
+<a class="whatsapp-btn" href="https://api.whatsapp.com/send?phone=554130890838" target="_blank">
+  <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893c0-3.18-1.24-6.169-3.495-8.418" fill="currentColor"/>
+  </svg>
+</a>
+<footer>
+<p>© 2025 Jr Infocell. Todos os direitos reservados.</p>
+</footer>
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".carousel img");
+    const prevButton = document.querySelector(".carousel-arrow.prev");
+    const nextButton = document.querySelector(".carousel-arrow.next");
+    
+    // Função para mostrar slide específico
+    function showSlide(index) {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+    
+    // Navegação automática
+    const autoSlide = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 4000);
+    
+    // Event listeners para as setas
+    prevButton.addEventListener("click", () => {
+      clearInterval(autoSlide); // Para a navegação automática quando o usuário interage
+      showSlide(currentSlide - 1);
+    });
+    
+    nextButton.addEventListener("click", () => {
+      clearInterval(autoSlide); // Para a navegação automática quando o usuário interage
+      showSlide(currentSlide + 1);
+    });
+  </script>
+</body>
+</html>
